@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* ── Light theme overrides ──────────────────────────────────────────────────
+   The app uses hardcoded dark Tailwind classes throughout.
+   When data-theme="light" is set on <html>, these rules override them.
+   Specificity: html[data-theme="light"] beats .class alone.
+   ───────────────────────────────────────────────────────────────────────── */
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Backgrounds */
+html[data-theme="light"] .bg-gray-950 { background-color: #f8fafc; }
+html[data-theme="light"] .bg-gray-900 { background-color: #ffffff; }
+html[data-theme="light"] .bg-gray-800 { background-color: #f1f5f9; }
+
+/* Semi-transparent backgrounds (Tailwind v4 uses bg-{color}/{opacity} syntax) */
+html[data-theme="light"] .bg-gray-800\/60  { background-color: rgba(241,245,249,0.9); }
+html[data-theme="light"] .bg-gray-800\/50  { background-color: rgba(241,245,249,0.8); }
+html[data-theme="light"] .bg-gray-800\/40  { background-color: rgba(241,245,249,0.7); }
+html[data-theme="light"] .bg-gray-700      { background-color: #e2e8f0; }
+
+/* Borders */
+html[data-theme="light"] .border-gray-800 { border-color: #e2e8f0; }
+html[data-theme="light"] .border-gray-700 { border-color: #cbd5e1; }
+
+/* Text */
+html[data-theme="light"] .text-white   { color: #0f172a; }
+html[data-theme="light"] .text-gray-300 { color: #334155; }
+html[data-theme="light"] .text-gray-400 { color: #475569; }
+html[data-theme="light"] .text-gray-500 { color: #64748b; }
+html[data-theme="light"] .text-gray-600 { color: #94a3b8; }
+
+/* Placeholder text */
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder { color: #94a3b8; }
+
+/* Scrollbar */
+html[data-theme="light"] { scrollbar-color: #cbd5e1 #f1f5f9; }
+
+
+/* ── Mermaid diagram text fix ────────────────────────────────────────────────
+   DOMPurify's SVG profile may strip the <style> block that Mermaid injects
+   for theme colors. These rules ensure text remains visible regardless.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Dark theme (default) ── */
+
+/* SVG <text> elements (arrows, edge labels) */
+html[data-theme="dark"] .mermaid-container svg text {
+  fill: #e2e8f0 !important;
+}
+
+/* HTML labels inside <foreignObject> — this is how Mermaid v10 renders node text */
+html[data-theme="dark"] .mermaid-container svg foreignObject div,
+html[data-theme="dark"] .mermaid-container svg foreignObject span,
+html[data-theme="dark"] .mermaid-container svg foreignObject p,
+html[data-theme="dark"] .mermaid-container .nodeLabel,
+html[data-theme="dark"] .mermaid-container .edgeLabel {
+  color: #e2e8f0 !important;
+  background: transparent !important;
+}
+
+/* ── Light theme ── */
+
+html[data-theme="light"] .mermaid-container svg text {
+  fill: #0f172a !important;
+}
+
+html[data-theme="light"] .mermaid-container svg foreignObject div,
+html[data-theme="light"] .mermaid-container svg foreignObject span,
+html[data-theme="light"] .mermaid-container svg foreignObject p,
+html[data-theme="light"] .mermaid-container .nodeLabel,
+html[data-theme="light"] .mermaid-container .edgeLabel {
+  color: #0f172a !important;
+  background: transparent !important;
+}
+
+html[data-theme="light"] .mermaid-container { background-color: #ffffff; }
+html[data-theme="light"] .mermaid-container svg { background: transparent; }
+
+
+/* ── Markmap (mind map) text fix ─────────────────────────────────────────────
+   Markmap renders text with dark gray by default — invisible on dark bg.
+   ───────────────────────────────────────────────────────────────────────── */
+
+html[data-theme="dark"] .markmap-container svg text,
+html[data-theme="dark"] .markmap-container .markmap-node text {
+  fill: #e2e8f0 !important;
+}
+html[data-theme="dark"] .markmap-container svg path,
+html[data-theme="dark"] .markmap-container svg line {
+  stroke: #6366f1 !important;
+}
+
+html[data-theme="light"] .markmap-container svg text,
+html[data-theme="light"] .markmap-container .markmap-node text {
+  fill: #0f172a !important;
+}
+html[data-theme="light"] .markmap-container svg path,
+html[data-theme="light"] .markmap-container svg line {
+  stroke: #4f46e5 !important;
+}
+html[data-theme="light"] .markmap-container { background-color: #ffffff; border-color: #e2e8f0; }
