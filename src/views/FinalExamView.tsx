@@ -33,7 +33,7 @@ export function FinalExamView({ plan, onBack }: Props) {
           <div className={`text-5xl font-bold my-4 ${passed ? 'text-yellow-400' : 'text-orange-400'}`}>{pct}%</div>
           <p className="text-gray-400 text-sm">{exam.score} de {qs.length} correctas</p>
           {passed && <p className="text-green-400 mt-2 text-sm">🎓 Dominaste "{plan.title}"</p>}
-          <div className="flex gap-3 justify-center mt-6">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
             <button onClick={onBack} className="px-5 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-white font-medium text-sm">← Volver</button>
             {!passed && (
               <button onClick={() => setExam({ answers: {}, submitted: false, score: 0 })} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-medium text-sm">🔄 Reintentar</button>
@@ -48,7 +48,7 @@ export function FinalExamView({ plan, onBack }: Props) {
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-3 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto flex items-center gap-3">
-          <button onClick={onBack} className="text-gray-400 hover:text-white p-1.5 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
+          <button onClick={onBack} className="text-gray-400 hover:text-white p-2 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
           <div className="flex-1">
             <h2 className="font-bold text-white text-sm">🏆 Examen Final</h2>
             <p className="text-gray-500 text-xs">{plan.title}</p>
@@ -59,7 +59,7 @@ export function FinalExamView({ plan, onBack }: Props) {
 
       <div className="max-w-3xl mx-auto p-4 md:p-6 space-y-4">
         {qs.map((q, i) => (
-          <div key={i} className="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+          <div key={i} className="bg-gray-900 rounded-2xl p-4 sm:p-5 border border-gray-800">
             <p className="text-white font-medium text-sm mb-4">{i + 1}. {q.question}</p>
             <div className="space-y-2">
               {(q.options || []).map((opt, oi) => (

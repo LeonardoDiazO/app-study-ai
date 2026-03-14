@@ -135,21 +135,27 @@ export function DashboardView({
 
       <div className="max-w-4xl mx-auto p-4 md:p-6">
         {/* Quick actions */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <button onClick={() => onStartFlashcards('all')} className="py-4 bg-yellow-600/20 hover:bg-yellow-600/40 border border-yellow-500/30 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+          <button onClick={() => onStartFlashcards('all')} className="py-3 sm:py-4 bg-yellow-600/20 hover:bg-yellow-600/40 border border-yellow-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
             <span className="text-2xl">🃏</span>
-            <p className="text-yellow-300 font-bold text-xs">Flashcards</p>
-            <p className="text-yellow-700 text-xs">{allCards.length - masteredTotal} pend.</p>
+            <div className="flex-1 sm:flex-none text-left sm:text-center">
+              <p className="text-yellow-300 font-bold text-xs">Flashcards</p>
+              <p className="text-yellow-700 text-xs">{allCards.length - masteredTotal} pend.</p>
+            </div>
           </button>
-          <button onClick={onOpenNotes} className="py-4 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/30 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all">
+          <button onClick={onOpenNotes} className="py-3 sm:py-4 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
             <span className="text-2xl">📓</span>
-            <p className="text-emerald-300 font-bold text-xs">Mis Notas</p>
-            <p className="text-emerald-700 text-xs">{totalNotes} nota{totalNotes !== 1 ? 's' : ''}</p>
+            <div className="flex-1 sm:flex-none text-left sm:text-center">
+              <p className="text-emerald-300 font-bold text-xs">Mis Notas</p>
+              <p className="text-emerald-700 text-xs">{totalNotes} nota{totalNotes !== 1 ? 's' : ''}</p>
+            </div>
           </button>
-          <button onClick={onOpenChat} className="py-4 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 rounded-2xl flex flex-col items-center justify-center gap-1 transition-all">
+          <button onClick={onOpenChat} className="py-3 sm:py-4 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
             <span className="text-2xl">🤖</span>
-            <p className="text-indigo-300 font-bold text-xs">Chatbot</p>
-            <p className="text-indigo-700 text-xs">Pregunta</p>
+            <div className="flex-1 sm:flex-none text-left sm:text-center">
+              <p className="text-indigo-300 font-bold text-xs">Chatbot</p>
+              <p className="text-indigo-700 text-xs">Pregunta</p>
+            </div>
           </button>
         </div>
 

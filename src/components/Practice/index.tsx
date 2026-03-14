@@ -33,7 +33,7 @@ export function Practice({ mod }: Props) {
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="w-full bg-gray-900 text-green-300 font-mono text-sm p-4 h-52 focus:outline-none resize-none"
+          className="w-full bg-gray-900 text-green-300 font-mono text-sm p-4 h-40 sm:h-52 focus:outline-none resize-none"
           spellCheck={false}
         />
       </div>

@@ -90,7 +90,7 @@ export function ChatBot({ plan, apiKey, contextModule, onClose }: Props) {
         {msgs.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === 'user' ? 'justify-end' : ''}`}>
             {m.role === 'ai' && <div className="w-8 h-8 rounded-xl bg-indigo-700 flex items-center justify-center text-sm shrink-0 mt-0.5">🤖</div>}
-            <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${m.role === 'user' ? 'bg-indigo-600 text-white rounded-br-sm' : 'bg-gray-800 text-gray-200 rounded-bl-sm'}`}>
+            <div className={`max-w-[85%] sm:max-w-[75%] md:max-w-[65%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${m.role === 'user' ? 'bg-indigo-600 text-white rounded-br-sm' : 'bg-gray-800 text-gray-200 rounded-bl-sm'}`}>
               {m.role === 'ai' ? renderText(m.text) : m.text}
             </div>
             {m.role === 'user' && <div className="w-8 h-8 rounded-xl bg-gray-700 flex items-center justify-center text-sm shrink-0 mt-0.5">👤</div>}
@@ -110,7 +110,7 @@ export function ChatBot({ plan, apiKey, contextModule, onClose }: Props) {
       {msgs.length <= 2 && (
         <div className="px-4 pb-2 flex gap-2 overflow-x-auto shrink-0">
           {suggestions.map((s, i) => (
-            <button key={i} onClick={() => send(s)} className="shrink-0 text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 px-3 py-2 rounded-xl whitespace-nowrap">{s}</button>
+            <button key={i} onClick={() => send(s)} className="shrink-0 text-xs sm:text-sm bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300 px-3 py-2.5 rounded-xl whitespace-nowrap">{s}</button>
           ))}
         </div>
       )}

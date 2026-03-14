@@ -52,7 +52,7 @@ function LegacyMap({ data }: { data: ConceptMapData }) {
 
   return (
     <div className="markmap-container overflow-auto rounded-xl bg-gray-950 p-2 transition-colors">
-      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="mx-auto max-w-full">
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ height: 'auto' }} className="mx-auto max-w-full">
         {bl.map((b, i) => {
           const ang = (i / bl.length) * 2 * Math.PI - Math.PI / 2;
           const bx = cx + 150 * Math.cos(ang), by = cy + 150 * Math.sin(ang);

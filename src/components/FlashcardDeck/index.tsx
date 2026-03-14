@@ -74,7 +74,7 @@ export function FlashcardDeck({ allCards, fcProgress, onUpdate, onBack, title }:
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-3 sticky top-0 z-10">
         <div className="max-w-lg mx-auto flex items-center gap-3">
-          <button onClick={onBack} className="text-gray-400 hover:text-white p-1.5 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
+          <button onClick={onBack} className="text-gray-400 hover:text-white p-2 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
           <div className="flex-1">
             <p className="text-xs text-gray-500">Flashcards · {title}</p>
             <div className="h-1.5 bg-gray-800 rounded-full mt-1.5 overflow-hidden">
@@ -102,7 +102,7 @@ export function FlashcardDeck({ allCards, fcProgress, onUpdate, onBack, title }:
           </div>
 
           <div style={{ perspective: '1000px', cursor: flipped ? 'default' : 'pointer' }} onClick={() => !flipped && setFlipped(true)}>
-            <div style={{ position: 'relative', transformStyle: 'preserve-3d', transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0)', height: '260px' }}>
+            <div className="min-h-[200px] sm:min-h-[260px]" style={{ position: 'relative', transformStyle: 'preserve-3d', transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)', transform: flipped ? 'rotateY(180deg)' : 'rotateY(0)' }}>
               <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden' }} className="bg-gray-900 border-2 border-gray-700 rounded-2xl p-8 flex flex-col items-center justify-center">
                 <p className="text-white text-base font-semibold text-center leading-relaxed">{card.front}</p>
                 <p className="text-gray-600 text-xs mt-6">👆 Toca para ver respuesta</p>
@@ -115,7 +115,7 @@ export function FlashcardDeck({ allCards, fcProgress, onUpdate, onBack, title }:
           </div>
 
           {flipped && (
-            <div className="grid grid-cols-3 gap-3 mt-5">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-5">
               {btns.map((b) => (
                 <button key={b.box} onClick={() => rate(b.box)} className={`py-3 rounded-xl border text-sm font-bold transition-all active:scale-95 ${b.cls}`}>
                   {b.icon}<br /><span className="text-xs font-normal">{b.label}</span>

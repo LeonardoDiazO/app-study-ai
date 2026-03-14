@@ -468,7 +468,7 @@ export function UploadView({
             🚀 Generar Curso ({pdfList.length} PDF{pdfList.length !== 1 ? 's' : ''})
           </button>
 
-          <div className="grid grid-cols-5 gap-2 text-center">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 text-center">
             {[['🗺', 'Mapas'], ['📊', 'Visuales'], ['🃏', 'Cards'], ['🤖', 'Chat'], ['🏆', 'Examen']].map(([ic, t]) => (
               <div key={t} className="bg-gray-800/50 rounded-xl p-2">
                 <div className="text-base mb-1">{ic}</div>

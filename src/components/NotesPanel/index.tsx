@@ -99,17 +99,17 @@ export function NotesPanel({ moduleId, notes: initialNotes, onSave }: Props) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && e.ctrlKey) addNote(); }}
-            placeholder="Escribe una nota… (Ctrl+Enter para guardar)"
+            placeholder="Escribe una nota…"
             rows={3}
             className="w-full bg-transparent text-white placeholder-gray-600 text-sm focus:outline-none resize-none leading-relaxed"
           />
         </div>
         <div className="flex justify-between items-center px-4 py-2">
-          <span className="text-gray-700 text-xs">{input.length} caracteres</span>
+          <span className="text-gray-600 text-xs">{input.length} car.</span>
           <button
             onClick={addNote}
             disabled={!input.trim()}
-            className="text-xs bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed text-white px-4 py-1.5 rounded-lg transition-all font-medium"
+            className="text-xs bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed text-white px-4 py-2 rounded-lg transition-all font-medium"
           >
             + Guardar nota
           </button>

@@ -70,11 +70,11 @@ export function ModuleView({
     <div className="min-h-screen bg-gray-950 text-white pb-20">
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-3 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto flex items-center gap-3">
-          <button onClick={onBack} className="text-gray-400 hover:text-white p-1.5 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
+          <button onClick={onBack} className="text-gray-400 hover:text-white p-2 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               {(planWithFiles.sourceFiles?.length ?? 0) > 1 && mod.sourceFile && (
-                <span className="text-xs text-indigo-400 bg-indigo-900/30 px-2 py-0.5 rounded-full truncate max-w-[100px]">📄 {mod.sourceFile}</span>
+                <span className="text-xs text-indigo-400 bg-indigo-900/30 px-2 py-0.5 rounded-full truncate max-w-[80px] sm:max-w-[140px]">📄 {mod.sourceFile}</span>
               )}
               <p className="text-gray-500 text-xs">Módulo {moduleIndex + 1}/{total}</p>
             </div>
@@ -108,7 +108,7 @@ export function ModuleView({
         <div className="flex border-b border-gray-800 bg-gray-900 overflow-x-auto">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              className={`px-4 py-3 text-xs font-medium whitespace-nowrap border-b-2 transition-all ${tab === t.id ? 'border-indigo-500 text-white' : 'border-transparent text-gray-500 hover:text-gray-300'}`}>
+              className={`px-3 sm:px-4 py-3 text-xs font-medium whitespace-nowrap border-b-2 transition-all ${tab === t.id ? 'border-indigo-500 text-white' : 'border-transparent text-gray-500 hover:text-gray-300'}`}>
               {t.icon} {t.label}
             </button>
           ))}
@@ -117,11 +117,11 @@ export function ModuleView({
         <div className="p-4 md:p-6">
           {tab === 'content' && (
             <div className="space-y-4">
-              <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+              <div className="bg-gray-900 rounded-2xl p-4 sm:p-5 border border-gray-800">
                 <h3 className="text-white font-semibold mb-2 text-sm">📝 Resumen</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">{mod.summary}</p>
               </div>
-              <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+              <div className="bg-gray-900 rounded-2xl p-4 sm:p-5 border border-gray-800">
                 <h3 className="text-white font-semibold mb-3 text-sm">🎯 Conceptos Clave</h3>
                 <div className="flex flex-wrap gap-2">
                   {mod.keyConcepts?.map((c, i) => (
@@ -130,7 +130,7 @@ export function ModuleView({
                 </div>
               </div>
               {mod.visualContent && mod.visualContent.length > 0 && (
-                <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+                <div className="bg-gray-900 rounded-2xl p-4 sm:p-5 border border-gray-800">
                   <h3 className="text-white font-semibold mb-3 text-sm">🖼 Elementos Visuales del Documento</h3>
                   <div className="space-y-3">
                     {mod.visualContent.map((v, i) => (
@@ -185,13 +185,13 @@ export function ModuleView({
                 <h3 className="text-white font-semibold text-sm">🃏 Flashcards</h3>
                 <span className="text-xs text-yellow-400 bg-yellow-900/30 px-2 py-1 rounded-full">{modMastered}/{modCards.length}</span>
               </div>
-              <div className="grid grid-cols-3 gap-3 mb-5">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
                 {[
                   ['🆕', 'Nuevas', modCards.filter((c) => !fcProgress[c.id]).length, 'text-blue-400', 'bg-blue-900/20'],
                   ['📚', 'Aprend.', modCards.filter((c) => fcProgress[c.id] === 1 || fcProgress[c.id] === 2).length, 'text-yellow-400', 'bg-yellow-900/20'],
                   ['⭐', 'Dominadas', modMastered, 'text-green-400', 'bg-green-900/20'],
                 ].map(([ic, lb, n, tc, bg]) => (
-                  <div key={String(lb)} className={`${bg} rounded-xl p-3 text-center`}>
+                  <div key={String(lb)} className={`${bg} rounded-xl p-2 sm:p-3 text-center`}>
                     <div className="text-xl mb-1">{ic}</div>
                     <div className={`text-lg font-bold ${tc}`}>{n}</div>
                     <div className="text-gray-500 text-xs">{lb}</div>
@@ -231,8 +231,8 @@ export function ModuleView({
         </div>
 
         <div className="flex justify-between px-4 pb-6">
-          <button onClick={() => onNavigate(Math.max(0, moduleIndex - 1))} disabled={moduleIndex === 0} className="px-4 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed rounded-xl text-sm text-gray-300">← Anterior</button>
-          <button onClick={() => onNavigate(Math.min(total - 1, moduleIndex + 1))} disabled={moduleIndex === total - 1} className="px-4 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed rounded-xl text-sm text-gray-300">Siguiente →</button>
+          <button onClick={() => onNavigate(Math.max(0, moduleIndex - 1))} disabled={moduleIndex === 0} className="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed rounded-xl text-sm text-gray-300">← Anterior</button>
+          <button onClick={() => onNavigate(Math.min(total - 1, moduleIndex + 1))} disabled={moduleIndex === total - 1} className="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed rounded-xl text-sm text-gray-300">Siguiente →</button>
         </div>
       </div>
 

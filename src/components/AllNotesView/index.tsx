@@ -43,7 +43,7 @@ export function AllNotesView({ plan, notes, onBack, onGoModule }: Props) {
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="bg-gray-900 border-b border-gray-800 px-4 py-3 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto flex items-center gap-3">
-          <button onClick={onBack} className="text-gray-400 hover:text-white p-1.5 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
+          <button onClick={onBack} className="text-gray-400 hover:text-white p-2 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
           <div className="flex-1">
             <h2 className="font-bold text-white text-sm">📓 Todas mis Notas</h2>
             <p className="text-gray-500 text-xs">{allNotes.length} nota{allNotes.length !== 1 ? 's' : ''} en {modulesWithNotes} módulos</p>
@@ -67,7 +67,7 @@ export function AllNotesView({ plan, notes, onBack, onGoModule }: Props) {
         )}
 
         {visible.map((note) => (
-          <div key={`${note.moduleId}_${note.id}`} className={`bg-gray-900 rounded-xl border p-4 ${note.pinned ? 'border-indigo-500/40' : 'border-gray-800'}`}>
+          <div key={`${note.moduleId}_${note.id}`} className={`bg-gray-900 rounded-xl border p-3 sm:p-4 ${note.pinned ? 'border-indigo-500/40' : 'border-gray-800'}`}>
             <div className="flex items-center gap-2 mb-2 flex-wrap">
               <span className={`text-xs px-2 py-0.5 rounded-full border ${TAG_COLORS[note.tag] || 'bg-gray-800 text-gray-400 border-gray-700'}`}>{note.tag}</span>
               <button
