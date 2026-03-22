@@ -1,4 +1,5 @@
 import { FloatingChat } from '../components/FloatingChat';
+import { Sun, Moon, FileText, Layers, ClipboardList, Map, NotebookPen, Code2, Trophy, Bot } from 'lucide-react';
 import type { CoursePlan, CourseScores } from '../types/course';
 import type { FlashcardProgress } from '../types/flashcard';
 import type { NotesStore } from '../types/notes';
@@ -69,17 +70,17 @@ export function DashboardView({
           </div>
           <div className="text-right">
             {isDone && <span className={`text-sm font-bold ${sp >= 70 ? 'text-green-400' : 'text-orange-400'}`}>{sp}%</span>}
-            {mC.length > 0 && <p className="text-xs text-yellow-500 mt-0.5">{mM}/{mC.length} 🃏</p>}
+            {mC.length > 0 && <p className="text-xs text-yellow-500 mt-0.5 flex items-center gap-1">{mM}/{mC.length} <Layers size={12} strokeWidth={2} /></p>}
           </div>
         </div>
         <h3 className="font-semibold text-white mb-1.5 group-hover:text-indigo-300 text-sm">{mod.title}</h3>
         <p className="text-gray-500 text-xs line-clamp-2">{mod.summary}</p>
         <div className="flex gap-3 mt-3 text-xs text-gray-600">
-          <span>📝 {(mod as { quiz?: unknown[] }).quiz?.length ?? 0}</span>
-          {(mod as { hasPractice?: boolean }).hasPractice && <span>💻</span>}
-          <span>🗺</span>
-          <span>🃏 {mM}/{mC.length}</span>
-          {mN > 0 && <span className="text-emerald-500">📓 {mN}</span>}
+          <span className="flex items-center gap-1"><ClipboardList size={14} strokeWidth={2} /> {(mod as { quiz?: unknown[] }).quiz?.length ?? 0}</span>
+          {(mod as { hasPractice?: boolean }).hasPractice && <span className="flex items-center gap-1"><Code2 size={14} strokeWidth={2} /></span>}
+          <span className="flex items-center gap-1"><Map size={14} strokeWidth={2} /></span>
+          <span className="flex items-center gap-1"><Layers size={14} strokeWidth={2} /> {mM}/{mC.length}</span>
+          {mN > 0 && <span className="flex items-center gap-1 text-emerald-500"><NotebookPen size={14} strokeWidth={2} /> {mN}</span>}
         </div>
         {/* Per-module progress bar */}
         <div className="mt-3">
@@ -104,7 +105,7 @@ export function DashboardView({
                 <div className="flex flex-wrap gap-1.5 mt-1">
                   {files.map((f, i) => {
                     const c = colorsByFile[f];
-                    return <span key={i} className={`text-xs px-2 py-0.5 rounded-full border ${COLOR_MAP[c]}`}>📄 {f.replace('.pdf', '')}</span>;
+                    return <span key={i} className={`text-xs px-2 py-0.5 rounded-full border inline-flex items-center gap-1 ${COLOR_MAP[c]}`}><FileText size={12} strokeWidth={2} />{f.replace('.pdf', '')}</span>;
                   })}
                 </div>
               )}
@@ -112,10 +113,10 @@ export function DashboardView({
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={toggleTheme}
-                className="text-lg w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition-colors"
                 title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               >
-                {theme === 'dark' ? '☀️' : '🌙'}
+                {theme === 'dark' ? <Sun size={18} strokeWidth={2} className="text-yellow-400" /> : <Moon size={18} strokeWidth={2} className="text-indigo-300" />}
               </button>
               <button onClick={onNewCourse} className="text-xs text-gray-500 hover:text-white border border-gray-700 px-3 py-1.5 rounded-lg">+ Nuevo</button>
             </div>
@@ -137,21 +138,21 @@ export function DashboardView({
         {/* Quick actions */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
           <button onClick={() => onStartFlashcards('all')} className="py-3 sm:py-4 bg-yellow-600/20 hover:bg-yellow-600/40 border border-yellow-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
-            <span className="text-2xl">🃏</span>
+            <Layers size={24} strokeWidth={1.5} className="text-yellow-300" />
             <div className="flex-1 sm:flex-none text-left sm:text-center">
               <p className="text-yellow-300 font-bold text-xs">Flashcards</p>
               <p className="text-yellow-700 text-xs">{allCards.length - masteredTotal} pend.</p>
             </div>
           </button>
           <button onClick={onOpenNotes} className="py-3 sm:py-4 bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
-            <span className="text-2xl">📓</span>
+            <NotebookPen size={24} strokeWidth={1.5} className="text-emerald-300" />
             <div className="flex-1 sm:flex-none text-left sm:text-center">
               <p className="text-emerald-300 font-bold text-xs">Mis Notas</p>
               <p className="text-emerald-700 text-xs">{totalNotes} nota{totalNotes !== 1 ? 's' : ''}</p>
             </div>
           </button>
           <button onClick={onOpenChat} className="py-3 sm:py-4 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 rounded-2xl flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 sm:px-0 transition-all">
-            <span className="text-2xl">🤖</span>
+            <Bot size={24} strokeWidth={1.5} className="text-indigo-300" />
             <div className="flex-1 sm:flex-none text-left sm:text-center">
               <p className="text-indigo-300 font-bold text-xs">Chatbot</p>
               <p className="text-indigo-700 text-xs">Pregunta</p>
@@ -167,7 +168,7 @@ export function DashboardView({
             return (
               <div key={file} className="mb-6">
                 <div className={`flex items-center gap-2 mb-3 px-3 py-2 rounded-xl border ${COLOR_MAP[c]} w-fit`}>
-                  <span>📄</span><span className="text-xs font-bold">{file}</span><span className="text-xs opacity-60">· {fileMods.length} módulos</span>
+                  <FileText size={14} strokeWidth={2} /><span className="text-xs font-bold">{file}</span><span className="text-xs opacity-60">· {fileMods.length} módulos</span>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {fileMods.map((mod) => {
@@ -186,8 +187,8 @@ export function DashboardView({
 
         <div className="mt-8 text-center">
           {done === total && total > 0 ? (
-            <button onClick={onStartExam} className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 rounded-2xl text-white font-bold text-lg shadow-lg">
-              🏆 Examen Final
+            <button onClick={onStartExam} className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 rounded-2xl text-white font-bold text-lg shadow-lg flex items-center gap-3">
+              <Trophy size={24} strokeWidth={1.5} /> Examen Final
             </button>
           ) : (
             <p className="text-gray-600 text-sm">Completa todos los módulos ({done}/{total})</p>

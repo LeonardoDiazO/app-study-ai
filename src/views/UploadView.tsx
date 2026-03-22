@@ -1,4 +1,17 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import {
+  GraduationCap, Key, BookOpen, FileText, FolderOpen, Zap,
+  AlertTriangle, CheckCircle, XCircle, Circle, Loader2,
+  Clipboard, Map, BarChart2, Layers, Bot, Trophy,
+} from 'lucide-react';
+
+const featureGrid = [
+  { Icon: Map, label: 'Mapas' },
+  { Icon: BarChart2, label: 'Visuales' },
+  { Icon: Layers, label: 'Cards' },
+  { Icon: Bot, label: 'Chat' },
+  { Icon: Trophy, label: 'Examen' },
+];
 import type { PdfInput } from '../services/ai/types';
 import { extractPageCount } from '../utils/extractPageCount';
 import { testApiKey } from '../services/ai/gemini';
@@ -158,19 +171,21 @@ export function UploadView({
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-lg">
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl text-3xl mb-4">🎓</div>
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4 sm:p-8">
+      <div className="w-full max-w-2xl">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-2xl mb-4">
+            <GraduationCap size={32} strokeWidth={1.5} />
+          </div>
           <h1 className="text-3xl font-bold text-white">StudyAI</h1>
           <p className="text-gray-400 mt-2 text-sm">Convierte tus PDFs en un curso inteligente</p>
         </div>
 
-        <div className="bg-gray-900 rounded-2xl p-6 space-y-5 border border-gray-800">
+        <div className="bg-gray-900 rounded-2xl p-6 sm:p-8 space-y-5 border border-gray-800">
           {courseSlots.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-2">
-                <p className="text-xs text-gray-400 font-medium">📚 Mis cursos ({courseSlots.length}/{MAX_COURSE_SLOTS})</p>
+                <p className="text-xs text-gray-400 font-medium flex items-center gap-1.5"><BookOpen size={14} strokeWidth={2} /> Mis cursos ({courseSlots.length}/{MAX_COURSE_SLOTS})</p>
                 {courseSlots.length >= MAX_COURSE_SLOTS && (
                   <p className="text-xs text-orange-400">Elimina uno para crear otro</p>
                 )}
@@ -211,7 +226,7 @@ export function UploadView({
           {draft && (
             <div className="bg-orange-900/30 border border-orange-500/40 rounded-xl p-4">
               <div className="flex items-start gap-3 mb-3">
-                <span className="text-xl">⚠️</span>
+                <AlertTriangle size={20} strokeWidth={2} className="text-orange-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-orange-300 text-sm font-bold">Generación interrumpida</p>
                   <p className="text-gray-400 text-xs mt-0.5">
@@ -241,7 +256,7 @@ export function UploadView({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <label className="text-sm text-gray-400">🔑 API Key de Gemini</label>
+                  <label className="text-sm text-gray-400 flex items-center gap-1.5"><Key size={16} strokeWidth={2} /> API Key de Gemini</label>
                   <button
                     type="button"
                     onClick={() => setShowHelp(true)}
@@ -271,8 +286,8 @@ export function UploadView({
                   }`}
                 />
                 {apiKey && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-base">
-                    {keyStatus === 'verified' ? '✅' : keyStatus === 'error' ? '❌' : keyFormatOk ? '🟡' : ''}
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {keyStatus === 'verified' ? <CheckCircle size={16} strokeWidth={2.5} className="text-green-400" /> : keyStatus === 'error' ? <XCircle size={16} strokeWidth={2.5} className="text-red-400" /> : keyFormatOk ? <Circle size={16} strokeWidth={2.5} className="text-yellow-400" /> : null}
                   </span>
                 )}
               </div>
@@ -285,7 +300,7 @@ export function UploadView({
                   disabled={keyStatus === 'checking'}
                   className="w-full py-2 bg-indigo-900/40 hover:bg-indigo-900/70 border border-indigo-500/40 rounded-xl text-indigo-300 text-xs font-bold transition-colors disabled:opacity-60"
                 >
-                  {keyStatus === 'checking' ? '⏳ Verificando...' : '⚡ Verificar clave antes de generar'}
+                  {keyStatus === 'checking' ? <span className="flex items-center justify-center gap-2"><Loader2 size={14} strokeWidth={2} className="animate-spin" /> Verificando...</span> : <span className="flex items-center justify-center gap-2"><Zap size={14} strokeWidth={2} /> Verificar clave antes de generar</span>}
                 </button>
               )}
 
@@ -297,7 +312,7 @@ export function UploadView({
               {/* Clipboard banner */}
               {clipboardKey && !apiKey.trim() && (
                 <div className="flex items-center justify-between bg-indigo-900/30 border border-indigo-500/40 rounded-xl px-3 py-2">
-                  <p className="text-indigo-300 text-xs">📋 Key detectada en portapapeles</p>
+                  <p className="text-indigo-300 text-xs flex items-center gap-1.5"><Clipboard size={14} strokeWidth={2} /> Key detectada en portapapeles</p>
                   <div className="flex gap-2 ml-2 shrink-0">
                     <button
                       type="button"
@@ -338,15 +353,15 @@ export function UploadView({
                 {/* 3-step visual flow */}
                 <div className="space-y-3 mb-5">
                   {[
-                    { n: '1', icon: '🌐', text: 'Abre Google AI Studio', sub: 'Haz clic en el botón de abajo →', done: false },
-                    { n: '2', icon: '🔑', text: 'Crea una API Key', sub: 'Clic en "Create API key in new project"', done: false },
-                    { n: '3', icon: '📋', text: 'Copia y pégala aquí', sub: clipboardKey ? '¡Key detectada! Cierra este modal y úsala' : 'La clave empieza con AIzaSy...', done: !!clipboardKey },
-                  ].map(({ n, icon, text, sub, done }) => (
+                    { n: '1', Icon: Map, text: 'Abre Google AI Studio', sub: 'Haz clic en el botón de abajo →', done: false },
+                    { n: '2', Icon: Key, text: 'Crea una API Key', sub: 'Clic en "Create API key in new project"', done: false },
+                    { n: '3', Icon: Clipboard, text: 'Copia y pégala aquí', sub: clipboardKey ? '¡Key detectada! Cierra este modal y úsala' : 'La clave empieza con AIzaSy...', done: !!clipboardKey },
+                  ].map(({ n, Icon, text, sub, done }) => (
                     <div key={n} className={`flex items-center gap-3 rounded-xl p-3 border transition-colors ${done ? 'bg-green-900/20 border-green-500/30' : n === '1' ? 'bg-indigo-900/20 border-indigo-500/30' : 'bg-gray-800/40 border-gray-700/50'}`}>
                       <div className={`w-8 h-8 rounded-full text-white text-xs font-bold flex items-center justify-center flex-shrink-0 ${done ? 'bg-green-600' : 'bg-indigo-600'}`}>
                         {done ? '✓' : n}
                       </div>
-                      <span className="text-xl flex-shrink-0">{icon}</span>
+                      <Icon size={20} strokeWidth={1.5} className="flex-shrink-0 text-gray-300" />
                       <div className="min-w-0">
                         <p className="text-white text-sm font-medium">{text}</p>
                         <p className={`text-xs truncate ${done ? 'text-green-400' : 'text-gray-500'}`}>{sub}</p>
@@ -356,7 +371,7 @@ export function UploadView({
                 </div>
 
                 <div className="flex gap-2 items-center bg-green-900/20 border border-green-500/20 rounded-xl px-3 py-2 mb-4">
-                  <span className="text-green-400 text-base">✓</span>
+                  <CheckCircle size={16} strokeWidth={2.5} className="text-green-400 flex-shrink-0" />
                   <p className="text-gray-400 text-xs">Gratis · 10 req/min · 500/día · tu key no se guarda en nuestros servidores</p>
                 </div>
 
@@ -376,7 +391,7 @@ export function UploadView({
           )}
 
           <div>
-            <label className="block text-sm text-gray-400 mb-2">📚 Nombre del curso <span className="text-gray-600">(opcional)</span></label>
+            <label className="flex items-center gap-1.5 text-sm text-gray-400 mb-2"><BookOpen size={16} strokeWidth={2} /> Nombre del curso <span className="text-gray-600">(opcional)</span></label>
             <input
               type="text"
               value={courseName}
@@ -388,7 +403,7 @@ export function UploadView({
 
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm text-gray-400">📄 PDFs del curso</label>
+              <label className="text-sm text-gray-400 flex items-center gap-1.5"><FileText size={16} strokeWidth={2} /> PDFs del curso</label>
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-600">{pdfList.length}/{MAX_PDFS} · máx. 100 págs. · 3 MB</span>
                 {pdfList.length < MAX_PDFS && (
@@ -400,14 +415,14 @@ export function UploadView({
 
             {pdfList.length === 0 ? (
               <div onClick={() => fileRef.current?.click()} className="border-2 border-dashed border-gray-700 hover:border-indigo-500/60 rounded-xl p-8 text-center cursor-pointer">
-                <div className="text-3xl mb-2">📂</div>
+                <div className="flex justify-center mb-2"><FolderOpen size={32} strokeWidth={1.5} className="text-gray-500" /></div>
                 <p className="text-gray-400 text-sm">Clic para subir PDFs</p>
               </div>
             ) : (
               <div className="space-y-2">
                 {pdfList.map((pdf, i) => (
                   <div key={i} className="flex items-center gap-3 bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3">
-                    <span className="text-xl">📄</span>
+                    <FileText size={20} strokeWidth={1.5} className="text-gray-400 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="text-white text-sm truncate">{pdf.name}</p>
                       <p className="text-green-400 text-xs">{pdf.pages ? `${pdf.pages} págs.` : 'Listo'}</p>
@@ -422,7 +437,7 @@ export function UploadView({
             )}
           </div>
 
-          {err && <div className="bg-red-900/30 border border-red-500/30 rounded-xl p-3 text-red-400 text-sm">⚠ {err}</div>}
+          {err && <div className="bg-red-900/30 border border-red-500/30 rounded-xl p-3 text-red-400 text-sm flex items-start gap-2"><AlertTriangle size={16} strokeWidth={2} className="flex-shrink-0 mt-0.5" /> {err}</div>}
 
           {/* Privacy notice — required before generating */}
           <div className="bg-gray-800/60 border border-gray-700 rounded-xl p-4 space-y-3">
@@ -465,14 +480,14 @@ export function UploadView({
             }
             className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed rounded-xl text-white font-bold"
           >
-            🚀 Generar Curso ({pdfList.length} PDF{pdfList.length !== 1 ? 's' : ''})
+            <span className="flex items-center justify-center gap-2"><Zap size={18} strokeWidth={2} /> Generar Curso ({pdfList.length} PDF{pdfList.length !== 1 ? 's' : ''})</span>
           </button>
 
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 text-center">
-            {[['🗺', 'Mapas'], ['📊', 'Visuales'], ['🃏', 'Cards'], ['🤖', 'Chat'], ['🏆', 'Examen']].map(([ic, t]) => (
-              <div key={t} className="bg-gray-800/50 rounded-xl p-2">
-                <div className="text-base mb-1">{ic}</div>
-                <p className="text-white text-xs font-medium">{t}</p>
+            {featureGrid.map(({ Icon, label }) => (
+              <div key={label} className="bg-gray-800/50 rounded-xl p-2">
+                <div className="flex justify-center mb-1"><Icon size={18} strokeWidth={1.5} className="text-gray-300" /></div>
+                <p className="text-white text-xs font-medium">{label}</p>
               </div>
             ))}
           </div>

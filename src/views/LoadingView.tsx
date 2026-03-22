@@ -1,3 +1,4 @@
+import { BrainCircuit, CheckCircle, Loader2 } from 'lucide-react';
 import type { LoadingStep } from '../services/ai/types';
 
 interface Props {
@@ -8,12 +9,17 @@ export function LoadingView({ loadingSteps }: Props) {
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
       <div className="text-center max-w-sm w-full">
-        <div className="text-6xl animate-pulse mb-6">🧠</div>
+        <div className="flex justify-center mb-6">
+          <BrainCircuit size={64} strokeWidth={1} className="text-indigo-400 animate-pulse" />
+        </div>
         <h2 className="text-2xl font-bold text-white mb-6">Creando tu curso</h2>
         <div className="space-y-3 text-left">
           {loadingSteps.map((s, i) => (
             <div key={i} className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${s.done ? 'bg-green-900/20 border-green-500/30' : 'bg-indigo-900/20 border-indigo-500/30 animate-pulse'}`}>
-              <span>{s.done ? '✅' : '⏳'}</span>
+              {s.done
+                ? <CheckCircle size={16} strokeWidth={2.5} className="text-green-400 flex-shrink-0" />
+                : <Loader2 size={16} strokeWidth={2} className="text-indigo-400 flex-shrink-0 animate-spin" />
+              }
               <p className={`text-sm ${s.done ? 'text-green-300' : 'text-indigo-300'}`}>{s.text}</p>
             </div>
           ))}

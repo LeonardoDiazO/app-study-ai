@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Trophy, BookOpen, GraduationCap, RotateCcw } from 'lucide-react';
 import type { CoursePlan } from '../types/course';
 
 interface ExamState {
@@ -28,15 +29,15 @@ export function FinalExamView({ plan, onBack }: Props) {
     return (
       <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center p-4">
         <div className="max-w-sm w-full text-center">
-          <div className="text-7xl mb-4">{passed ? '🏆' : '📚'}</div>
+          <div className="flex justify-center mb-4">{passed ? <Trophy size={72} strokeWidth={1} className="text-yellow-400" /> : <BookOpen size={72} strokeWidth={1} className="text-indigo-400" />}</div>
           <h2 className="text-2xl font-bold">{passed ? '¡Curso Completado!' : 'Sigue practicando'}</h2>
           <div className={`text-5xl font-bold my-4 ${passed ? 'text-yellow-400' : 'text-orange-400'}`}>{pct}%</div>
           <p className="text-gray-400 text-sm">{exam.score} de {qs.length} correctas</p>
-          {passed && <p className="text-green-400 mt-2 text-sm">🎓 Dominaste "{plan.title}"</p>}
+          {passed && <p className="text-green-400 mt-2 text-sm flex items-center justify-center gap-2"><GraduationCap size={16} strokeWidth={2} /> Dominaste "{plan.title}"</p>}
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
             <button onClick={onBack} className="px-5 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-white font-medium text-sm">← Volver</button>
             {!passed && (
-              <button onClick={() => setExam({ answers: {}, submitted: false, score: 0 })} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-medium text-sm">🔄 Reintentar</button>
+              <button onClick={() => setExam({ answers: {}, submitted: false, score: 0 })} className="flex items-center gap-2 px-5 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-medium text-sm"><RotateCcw size={15} strokeWidth={2} /> Reintentar</button>
             )}
           </div>
         </div>
@@ -50,7 +51,7 @@ export function FinalExamView({ plan, onBack }: Props) {
         <div className="max-w-3xl mx-auto flex items-center gap-3">
           <button onClick={onBack} className="text-gray-400 hover:text-white p-2 hover:bg-gray-800 rounded-lg text-xl leading-none">←</button>
           <div className="flex-1">
-            <h2 className="font-bold text-white text-sm">🏆 Examen Final</h2>
+            <h2 className="font-bold text-white text-sm flex items-center gap-2"><Trophy size={16} strokeWidth={2} className="text-yellow-400" /> Examen Final</h2>
             <p className="text-gray-500 text-xs">{plan.title}</p>
           </div>
           <span className="text-xs text-gray-500 bg-gray-800 px-3 py-1.5 rounded-full">{Object.keys(exam.answers).length}/{qs.length}</span>

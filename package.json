@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "dompurify": "^3.3.2",
+    "lucide-react": "^0.577.0",
     "markmap-lib": "^0.18.12",
     "markmap-view": "^0.18.12",
     "mermaid": "^11.12.3",
